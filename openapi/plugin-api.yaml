@@ -1488,9 +1488,21 @@ paths:
             text/x-shellscript:
               schema:
                 type: string
+              examples:
+                script:
+                  summary: 构造示例
+                  value: |
+                    #!/bin/sh
+                    echo "refresh mn-bridge skill"
             text/plain:
               schema:
                 type: string
+              examples:
+                script:
+                  summary: 构造示例
+                  value: |
+                    #!/bin/sh
+                    echo "refresh mn-bridge skill"
       x-codeSamples:
         - lang: javascript
           label: 读取脚本文本
@@ -1514,6 +1526,11 @@ paths:
             text/plain:
               schema:
                 type: string
+              examples:
+                script:
+                  summary: 构造示例
+                  value: |
+                    Write-Host "refresh mn-bridge skill"
       x-codeSamples:
         - lang: javascript
           label: 读取脚本文本
@@ -4499,10 +4516,18 @@ paths:
               schema:
                 type: string
                 format: binary
+              examples:
+                artifact:
+                  summary: 构造示例
+                  value: <binary apkg bytes>
             application/zip:
               schema:
                 type: string
                 format: binary
+              examples:
+                archive:
+                  summary: 构造示例
+                  value: <binary zip bytes>
         '404':
           $ref: '#/components/responses/NotFound'
       x-codeSamples:
@@ -6516,10 +6541,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 创建练习会话
+          source: |
+            const r = await mn.api('/writing/session-create', {
+              method: 'POST',
+              body: { requestId, questionId, carrier: 'focus', confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-reserve:
     post:
       tags:
@@ -6536,10 +6585,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 预留尝试
+          source: |
+            const r = await mn.api('/writing/session-reserve', {
+              method: 'POST',
+              body: { requestId, runId, questionId, carrier: 'focus', confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-cancel:
     post:
       tags:
@@ -6554,10 +6627,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 取消会话
+          source: |
+            const r = await mn.api('/writing/session-cancel', {
+              method: 'POST',
+              body: { requestId, runId, confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-pause:
     post:
       tags:
@@ -6572,10 +6669,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 暂停会话
+          source: |
+            const r = await mn.api('/writing/session-pause', {
+              method: 'POST',
+              body: { requestId, runId, confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-resume:
     post:
       tags:
@@ -6590,10 +6711,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 恢复会话
+          source: |
+            const r = await mn.api('/writing/session-resume', {
+              method: 'POST',
+              body: { requestId, runId, confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-finish:
     post:
       tags:
@@ -6608,10 +6753,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 结束会话
+          source: |
+            const r = await mn.api('/writing/session-finish', {
+              method: 'POST',
+              body: { requestId, runId, confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-assess:
     post:
       tags:
@@ -6626,10 +6795,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 记录评估
+          source: |
+            const r = await mn.api('/writing/session-assess', {
+              method: 'POST',
+              body: { requestId, runId, attemptId, outcome: 'passed', confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-reconcile:
     post:
       tags:
@@ -6644,10 +6837,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 对齐会话记录
+          source: |
+            const r = await mn.api('/writing/session-reconcile', {
+              method: 'POST',
+              body: { requestId, runId, confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/focus-enter:
     post:
       tags:
@@ -6662,10 +6879,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingTransitionResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，转场已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    state: pending
+                    settled: false
+                    outcome: accepted
+                    ready: false
+                    canSwitch: false
+                    scope: current-window
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingTransitionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 进入焦点卡作答
+          source: |
+            const r = await mn.api('/writing/focus-enter', {
+              method: 'POST',
+              body: { requestId, questionId, carrier: 'focus', confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/blank-prepare:
     post:
       tags:
@@ -6680,10 +6919,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingTransitionResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，转场已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    state: pending
+                    settled: false
+                    outcome: accepted
+                    ready: false
+                    canSwitch: false
+                    scope: current-window
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingTransitionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 准备留白作答空间
+          source: |
+            const r = await mn.api('/writing/blank-prepare', {
+              method: 'POST',
+              body: { requestId, questionId, carrier: 'blank', confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/blank-enter:
     post:
       tags:
@@ -6698,10 +6959,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingTransitionResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，转场已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    state: pending
+                    settled: false
+                    outcome: accepted
+                    ready: false
+                    canSwitch: false
+                    scope: current-window
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingTransitionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 进入留白作答
+          source: |
+            const r = await mn.api('/writing/blank-enter', {
+              method: 'POST',
+              body: { requestId, questionId, carrier: 'blank', confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/focus-begin:
     post:
       tags:
@@ -6716,10 +6999,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingTransitionResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，转场已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    state: pending
+                    settled: false
+                    outcome: accepted
+                    ready: false
+                    canSwitch: false
+                    scope: current-window
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingTransitionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 开始焦点卡分层练习
+          source: |
+            const r = await mn.api('/writing/focus-begin', {
+              method: 'POST',
+              body: { requestId, questionId, carrier: 'focus', confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/blank-begin:
     post:
       tags:
@@ -6734,10 +7039,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingTransitionResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，转场已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    state: pending
+                    settled: false
+                    outcome: accepted
+                    ready: false
+                    canSwitch: false
+                    scope: current-window
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingTransitionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 开始留白分层练习
+          source: |
+            const r = await mn.api('/writing/blank-begin', {
+              method: 'POST',
+              body: { requestId, questionId, carrier: 'blank', confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/layer-restore:
     post:
       tags:
@@ -6752,10 +7079,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingTransitionResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，转场已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    state: pending
+                    settled: false
+                    outcome: accepted
+                    ready: false
+                    canSwitch: false
+                    scope: current-window
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingTransitionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 恢复练习手写层
+          source: |
+            const r = await mn.api('/writing/layer-restore', {
+              method: 'POST',
+              body: { requestId, runId, attemptId, confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-focus-begin:
     post:
       tags:
@@ -6770,10 +7119,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 会话内开始焦点卡作答
+          source: |
+            const r = await mn.api('/writing/session-focus-begin', {
+              method: 'POST',
+              body: { requestId, runId, questionId, carrier: 'focus', confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-blank-begin:
     post:
       tags:
@@ -6788,10 +7161,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 会话内开始留白作答
+          source: |
+            const r = await mn.api('/writing/session-blank-begin', {
+              method: 'POST',
+              body: { requestId, runId, questionId, carrier: 'blank', confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-layer-restore:
     post:
       tags:
@@ -6806,10 +7203,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 恢复会话手写层
+          source: |
+            const r = await mn.api('/writing/session-layer-restore', {
+              method: 'POST',
+              body: { requestId, runId, attemptId, confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-focus-enter:
     post:
       tags:
@@ -6824,10 +7245,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 会话内进入焦点卡作答
+          source: |
+            const r = await mn.api('/writing/session-focus-enter', {
+              method: 'POST',
+              body: { requestId, runId, questionId, carrier: 'focus', confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-blank-enter:
     post:
       tags:
@@ -6842,10 +7287,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 会话内进入留白作答
+          source: |
+            const r = await mn.api('/writing/session-blank-enter', {
+              method: 'POST',
+              body: { requestId, runId, questionId, carrier: 'blank', confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/session-exit:
     post:
       tags:
@@ -6860,10 +7329,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingSessionCommandResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，命令已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    runId: run-20261010-001
+                    attemptId: attempt-001
+                    state: accepted
+                    outcome: pending
+                    settled: false
+                    persisted: true
+                    ready: false
+                    canSwitch: false
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
       requestBody:
         $ref: '#/components/requestBodies/WritingSessionCommand'
+      x-codeSamples:
+        - lang: javascript
+          label: 退出当前练习尝试
+          source: |
+            const r = await mn.api('/writing/session-exit', {
+              method: 'POST',
+              body: { requestId, runId, attemptId, confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /writing/transition-result:
     post:
       tags:
@@ -6879,6 +7372,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WritingTransitionResponse'
+              examples:
+                accepted:
+                  summary: 构造示例，转场已受理
+                  value:
+                    schemaVersion: 1
+                    bridgeApiVersion: '0.91'
+                    requestId: 9F8E7D6C-5B4A-4938-8271-6F5E4D3C2B1A
+                    state: pending
+                    settled: false
+                    outcome: accepted
+                    ready: false
+                    canSwitch: false
+                    scope: current-window
         '404':
           $ref: '#/components/responses/NotFound'
       requestBody:
@@ -8859,10 +9365,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocumentExportPlanResponse'
+              examples:
+                ready:
+                  summary: 构造示例，未实测
+                  value:
+                    planId: plan-3F1A2B40
+                    state: ready
+                    exportId: export-7C2D9E10
+                    exportRoute: /documents/8daef026/export
+                    downloadRoute: /document-exports/export-7C2D9E10/file
+                    selectedPageCount: 12
+                    progress: 1
         '404':
           $ref: '#/components/responses/NotFound'
       requestBody:
         $ref: '#/components/requestBodies/ConfirmOnly'
+      x-codeSamples:
+        - lang: javascript
+          label: 取消导出计划
+          source: |
+            const r = await mn.api('/document-export-plans/' + planId + '/cancel', {
+              method: 'POST',
+              body: { confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /document-export-plans/{exportPlanId}/discard:
     post:
       tags:
@@ -8879,10 +9405,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocumentExportPlanResponse'
+              examples:
+                ready:
+                  summary: 构造示例，未实测
+                  value:
+                    planId: plan-3F1A2B40
+                    state: ready
+                    exportId: export-7C2D9E10
+                    exportRoute: /documents/8daef026/export
+                    downloadRoute: /document-exports/export-7C2D9E10/file
+                    selectedPageCount: 12
+                    progress: 1
         '404':
           $ref: '#/components/responses/NotFound'
       requestBody:
         $ref: '#/components/requestBodies/ConfirmOnly'
+      x-codeSamples:
+        - lang: javascript
+          label: 丢弃导出计划
+          source: |
+            const r = await mn.api('/document-export-plans/' + planId + '/discard', {
+              method: 'POST',
+              body: { confirm: true }
+            });
+            if (r.error) mn.log(r.error.code);
   /document-exports/{exportId}/file:
     get:
       tags:
@@ -8903,10 +9449,18 @@ paths:
               schema:
                 type: string
                 format: binary
+              examples:
+                pdf:
+                  summary: 构造示例
+                  value: <binary pdf bytes>
             application/octet-stream:
               schema:
                 type: string
                 format: binary
+              examples:
+                file:
+                  summary: 构造示例
+                  value: <binary export bytes>
         '404':
           $ref: '#/components/responses/NotFound'
       x-codeSamples:
